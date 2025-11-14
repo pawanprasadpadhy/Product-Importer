@@ -15,7 +15,7 @@ ENV/
 logs/
 
 # Data
-data/
+# data/
 
 # Other
 __pycache__/

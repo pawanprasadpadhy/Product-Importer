@@ -38,8 +38,8 @@ cd product-importer
 
 2. Create virtual environment:
 ```bash
-python -m venv venv
-source venv/bin/activate  # On Windows: venv\Scripts\activate
+python -m venv .venv
+source .venv/bin/activate  # On Windows: venv\Scripts\activate
 ```
 
 3. Install dependencies:
@@ -97,10 +97,10 @@ redis-server
 
 ## CSV Format
 
-Your CSV file should have the following columns:
+The CSV file should have the following columns:
 ```
-sku,name,description,price
-PROD001,Product Name,Product description,19.99
+sku,name,description
+PROD001,Product Name,Product description
 ```
 
 ## API Endpoints
