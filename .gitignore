@@ -1,0 +1,39 @@
+# Virtual Environment
+.venv/
+venv/
+env/
+ENV/
+
+# Environment Variables
+.env
+
+# IDEs
+.vscode/
+.idea/
+
+# Logs
+logs/
+
+# Data
+data/
+
+# Other
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+.env
+.venv
+db.sqlite3
+*.log
+local_settings.py
+staticfiles/
+media/
+.DS_Store
+*.swp
+*.swo
+.idea/
+.vscode/
+*.pid
+celerybeat-schedule
