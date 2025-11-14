@@ -1,0 +1,85 @@
+<!-- products/templates/products/webhooks.html -->
+{% extends 'products/base.html' %}
+
+{% block content %}
+<div class="card">
+    <div class="header-bar">
+        <h2>Webhooks</h2>
+        <button onclick="openCreateModal()" class="btn btn-success">+ Add Webhook</button>
+    </div>
+    
+    <table>
+        <thead>
+            <tr>
+                <th>URL</th>
+                <th>Event Type</th>
+                <th>Status</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for webhook in webhooks %}
+            <tr>
+                <td>{{ webhook.url }}</td>
+                <td>{{ webhook.get_event_type_display }}</td>
+                <td>
+                    <span class="status-{{ webhook.is_active|yesno:'active,inactive' }}">
+                        {% if webhook.is_active %}Active{% else %}Inactive{% endif %}
+                    </span>
+                </td>
+                <td class="webhook-actions-cell">
+                    <button onclick="testWebhook({{ webhook.id }})" class="btn">Test</button>
+                    <button onclick="openEditModal({{ webhook.id }})" class="btn">Edit</button>
+                    <button onclick="deleteWebhook({{ webhook.id }})" class="btn btn-danger">Delete</button>
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="4" style="text-align: center; padding: 2rem;">No webhooks configured</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<!-- Create/Edit Modal -->
+<div id="webhookModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <h2 id="modalTitle">Add Webhook</h2>
+        <form id="webhookForm">
+            <input type="hidden" id="webhookId">
+            
+            <div class="form-group">
+                <label for="url">Webhook URL *</label>
+                <input type="url" id="url" required placeholder="https://example.com/webhook">
+            </div>
+            
+            <div class="form-group">
+                <label for="event_type">Event Type *</label>
+                <select id="event_type" required>
+                    <option value="">Select event type</option>
+                    <option value="product.created">Product Created</option>
+                    <option value="product.updated">Product Updated</option>
+                    <option value="product.deleted">Product Deleted</option>
+                    <option value="upload.completed">Upload Completed</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label>
+                    <input type="checkbox" id="is_active" checked>
+                    Active
+                </label>
+            </div>
+            
+            <div style="display: flex; gap: 1rem;">
+                <button type="submit" class="btn btn-success">Save</button>
+                <button type="button" onclick="closeModal()" class="btn">Cancel</button>
+            </div>
+        </form>
+    </div>
+</div>
+{% load static %}
+<script src="{% static 'products/scripts/webhooks.js' %}"></script>
+{% endblock %}

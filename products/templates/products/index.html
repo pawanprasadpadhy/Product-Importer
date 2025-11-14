@@ -1,0 +1,35 @@
+<!-- products/templates/products/index.html -->
+{% extends 'products/base.html' %}
+
+{% block content %}
+<div class="card">
+    <h2>Upload Products CSV</h2>
+    <form id="uploadForm" enctype="multipart/form-data">
+        <div class="form-group">
+            <label for="csvFile">Choose CSV File (up to 500,000 products)</label>
+            <input type="file" id="csvFile" name="file" accept=".csv" required>
+        </div>
+        <button type="submit" class="btn">Upload</button>
+    </form>
+    
+    <div id="uploadProgress" style="display: none; margin-top: 2rem;">
+        <h3>Upload Progress</h3>
+        <div class="progress-bar">
+            <div class="progress-bar-fill" id="progressFill" style="width: 0%">0%</div>
+        </div>
+        <p id="progressText">Preparing upload...</p>
+    </div>
+    
+    <div id="uploadResult"></div>
+</div>
+
+<div class="card">
+    <h2>Quick Actions</h2>
+    <div style="display: flex; gap: 1rem;">
+        <a href="{% url 'products:product_list' %}" class="btn">View All Products</a>
+        <button onclick="confirmBulkDelete()" class="btn btn-danger">Delete All Products</button>
+    </div>
+</div>
+{% load static %}
+<script src="{% static 'products/scripts/index.js' %}"></script>
+{% endblock %}

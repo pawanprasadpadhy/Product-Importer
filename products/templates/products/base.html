@@ -1,0 +1,30 @@
+<!-- products/templates/products/base.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Product Importer{% endblock %}</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'products/stylesheets/style.css' %}">
+    {% block extra_css %}{% endblock %}
+</head>
+<body>
+    <nav>
+        <div class="container">
+            <h1>Product Importer</h1>
+            <ul>
+                <li><a href="{% url 'products:index' %}">Dashboard</a></li>
+                <li><a href="{% url 'products:product_list' %}">Products</a></li>
+                <li><a href="{% url 'products:webhook_list' %}">Webhooks</a></li>
+            </ul>
+        </div>
+    </nav>
+    
+    <div class="container">
+        {% block content %}{% endblock %}
+    </div>
+    
+    {% block extra_js %}{% endblock %}
+</body>
+</html>
