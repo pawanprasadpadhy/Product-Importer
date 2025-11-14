@@ -5,11 +5,11 @@ set -e
 echo "Setting up Product Importer..."
 
 # Create virtual environment
-# python -m venv .venv
+python -m venv .venv
 source .venv/bin/activate
 
 # Install dependencies
-# pip install -r requirements.txt
+pip install -r requirements.txt
 
 # Create PostgreSQL database if it doesn't exist
 DB_NAME="product_importer_db"
